@@ -1,0 +1,104 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+body{
+    font-family: 'Roboto', sans-serif;
+ }
+
+.form{
+    margin: 3%;
+    margin-left: 40%;
+}
+form{
+    background-color:#7198d1;
+    padding:10px;
+    width:15vw;
+    display: relative;
+ }
+fieldset{
+    padding:20px;
+    border:1px solid #464646;
+ }
+input, textarea, select, option{
+    background-color:#FFF3F3;
+    margin: 2%;
+    color: #000000;
+ }
+select{
+    margin-top:10px;
+ }
+input[type=submit]{
+    width:100px;
+    margin:20px;
+    border: 1px solid #464646;
+    padding: 5px;
+    cursor:pointer;
+ }
+ #map{
+     float: right;
+ }
+ #cartecampus {
+    width : 50vw;
+    height : 80vh;
+}
+#stationInformations{
+    float: left;
+    max-height: 80vh;
+    overflow: auto;
+    padding: 10px;
+    background-color: #7198d1;
+    width: 25vw;
+    margin-right: 1rem;
+}
+table{
+    border-width:1px; 
+    border-style:solid; 
+    border-color:black;
+    width:50%;
+    border-collapse: collapse;
+}
+td { 
+    border-width:1px;
+    border-style:solid; 
+    border-color:black;
+    width:50%;
+    padding: 10px;
+}
+
+.cache{
+    display: none;
+}
+
+/* menu */
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+}
+
+li {
+    float: left;
+}
+
+li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+li a:hover {
+    background-color: #111;
+}
+
+.title {
+    font-weight: bold;
+    text-align: center;
+    padding: 14px 16px;
+    color: white;
+    display: block;
+}
