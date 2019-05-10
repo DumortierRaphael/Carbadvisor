@@ -2,7 +2,9 @@
 require_once("lib/db_parms.php");
    
 Class DataLayer{
+
     private $connexion;
+    /**Fonction de connexion a la bdd webtp */
     public function __construct(){
 
             $this->connexion = new PDO(
@@ -13,13 +15,18 @@ Class DataLayer{
                      );
 
     }
-    /**
+    
+  #region
+
+  /**
+     * ****UTILISATEUR****
+     *
      * Return data of a user
      * Param : pseudo of the user
      */
     function getUser($pseudo){
       $sql = <<<EOD
-      select * FROM user
+      select pseudo,mail,ville,description,total,nbavis FROM user
       where pseudo = :pseudo
 EOD;
       $stmt = $this->connexion->prepare($sql);
@@ -28,7 +35,42 @@ EOD;
       return $stmt->fetch();
     }
 
+    /* Fonction boléenne qui reverait true ou false avec le mdp en param ?*/
+    function getPassword($pseudo){
+      $sql = <<<EOD
+      select mdp FROM user
+      where pseudo = :pseudo
+EOD;
+      $stmt = $this->connexion->prepare($sql);
+      $stmt->bindValue(':pseudo',$pseudo);
+      $stmt->execute();
+      return $stmt->fetch();
+    }
     /**
+     * Create account
+     */
+    function setUser($pseudo,$mail,$ville,$description,$mdp){
+      $sql=<<<EOD
+      Insert into user(pseudo,mail,ville,description,mdp)
+      VALUES (:pseudo,:mail,:ville,:description,:mdp)
+EOD;
+      $stmt = $this->connexion->prepare($sql);
+      $stmt->bindValue(':pseudo',$pseudo);
+      $stmt->bindValue(':mail',$mail);
+      $stmt->bindValue(':ville',$ville);
+      $stmt->bindValue(':description',$description);
+      $stmt->bindValue(':mpd',$mdp);
+      $stmt->execute();
+      return $stmt->rowCount() == 1;
+
+    }
+#endregion
+
+#region
+
+    /**
+     * STATION
+     *
      * Return data of a station
      * Param : id of a station
      * 
@@ -43,12 +85,24 @@ EOD;
       return $stmt->fetch();
 
     }
+
     /**
-     *  
+     *  Return rate info for a station
      */
+    function getRate($idStation){
+      $sql = <<<EOD
+      SELECT nbnotes,noteglobale,noteaccueil,noteprix,noteservice
+      FROM stations where id = :id
+EOD;
+      $stmt= $this->connexion->prepare($sql);
+      $stmt->bindValue(':id',$idStation);
+      $stmt->execute();
+      return $stmt->fetch(); 
+    }
 
+#endregion
 
-
+#region
 
     /*
     *  Récupère une liste des coureurs ordonnée par equipe puis par nom
@@ -227,5 +281,6 @@ EOD;
 
 
 */
+#endregion
+
   }
-?>
